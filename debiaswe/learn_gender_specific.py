@@ -1,3 +1,4 @@
+from __future__ import print_function, division
 import sys
 import argparse
 from we import *
@@ -6,7 +7,6 @@ import json
 if sys.version_info[0] < 3:
     import io
     open = io.open
-    from __future__ import print_function, division
 """
 Learn gender specific words
 

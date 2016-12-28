@@ -1,3 +1,4 @@
+from __future__ import print_function, division
 import re
 import sys
 import numpy as np
@@ -6,7 +7,6 @@ from sklearn.decomposition import PCA
 if sys.version_info[0] < 3:
     import io
     open = io.open
-    from __future__ import print_function, division
 
 """
 Tools for debiasing word embeddings

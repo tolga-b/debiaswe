@@ -1,3 +1,4 @@
+from __future__ import print_function, division
 import we
 import json
 import numpy as np
@@ -6,7 +7,6 @@ import sys
 if sys.version_info[0] < 3:
     import io
     open = io.open
-    from __future__ import print_function, division
 """
 Hard-debias embedding
 
