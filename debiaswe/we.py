@@ -7,7 +7,8 @@ from sklearn.decomposition import PCA
 if sys.version_info[0] < 3:
     import io
     open = io.open
-
+else:
+    unicode = str
 """
 Tools for debiasing word embeddings
 
@@ -33,6 +34,14 @@ def safe_word(w):
     # ignore words with numbers, etc.
     # [a-zA-Z\.'_\- :;\(\)\]] for emoticons
     return (re.match(r"^[a-z_]*$", w) and len(w) < 20 and not re.match(r"^_*$", w))
+
+
+def to_utf8(text, errors='strict', encoding='utf8'):
+    """Convert a string (unicode or bytestring in `encoding`), to bytestring in utf8."""
+    if isinstance(text, unicode):
+        return text.encode('utf8')
+    # do bytestring -> unicode -> utf8 full circle, to ensure valid utf8
+    return unicode(text, encoding, errors=errors).encode('utf8')
 
 
 class WordEmbedding:
@@ -105,6 +114,17 @@ class WordEmbedding:
         with open(filename, "w") as f: 
             f.write("\n".join([w+" " + " ".join([str(x) for x in v]) for w, v in zip(self.words, self.vecs)]))
         print("Wrote", self.n, "words to", filename)
+
+    def save_w2v(self, filename, binary=True):
+        with open(filename, 'wb') as fout:
+            fout.write(to_utf8("%s %s\n" % self.vecs.shape))
+            # store in sorted order: most frequent words at the top
+            for i, word in enumerate(self.words):
+                row = self.vecs[i]
+                if binary:
+                    fout.write(to_utf8(word) + b" " + row.tostring())
+                else:
+                    fout.write(to_utf8("%s %s\n" % (word, ' '.join("%f" % val for val in row))))
 
     def remove_directions(self, directions): #directions better be orthogonal
         self.desc += ", removed"

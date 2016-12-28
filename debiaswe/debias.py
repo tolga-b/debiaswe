@@ -68,24 +68,7 @@ if __name__ == "__main__":
 
     print("Saving to file...")
     if args.embedding_filename[-4:] == args.debiased_filename[-4:] == ".bin":
-        from gensim.models import word2vec
-        sys.stdout.write("Saving in word2vec format as "+args.debiased_filename)
-        sys.stdout.write(".\n    Step 1. Loading old embedding.")
-        sys.stdout.flush()
-        model = word2vec.Word2Vec.load_word2vec_format(args.embedding_filename, binary=True)
-        d = E.vecs[0].shape[0]
-        sys.stdout.write(".\n    Step 2. Copying data [0.0%]")
-        sys.stdout.flush()
-        for counter, w in enumerate(E.words):
-            if counter % 1000 == 0:
-                sys.stdout.write("\r    Step 2. Copying data [" + str(int(counter * 1000 / len(E.words)) / 10.0) + "%]")
-                sys.stdout.flush()
-            v = E.v(w)
-            for i in range(d):
-                model[w][i] = v[i]
-        sys.stdout.write("\n     Step 3. Writing file")
-        sys.stdout.flush()
-        model.save_word2vec_format(args.debiased_filename, binary=True)
+        E.save_w2v(args.debiased_filename)
     else:
         E.save(args.debiased_filename)
 
