@@ -33,8 +33,8 @@ def debias(E, gender_specific_words, definitional, equalize):
             z = np.sqrt(1 - np.linalg.norm(y)**2)
             if (E.v(a) - E.v(b)).dot(gender_direction) < 0:
                 z = -z
-                E.vecs[E.index[a]] = z * gender_direction + y
-                E.vecs[E.index[b]] = -z * gender_direction + y
+            E.vecs[E.index[a]] = z * gender_direction + y
+            E.vecs[E.index[b]] = -z * gender_direction + y
     E.normalize()
 
 
