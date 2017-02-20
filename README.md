@@ -30,4 +30,6 @@ We also have seed data used to debias and crowd data used to evaluate the embedd
 - **definitional_pairs.json**: The ten pairs of words we use to define the gender direction
 - **equalize_pairs.json**: Some crowdsourced F-M pairs of words that represent gender direction
 
-This work only considers M-F gender biases. What about other biases, like racial biases, other genders, ageism, etc.?
+```diff
++ This is only a partial repo at the moment. I will add more features as I get time.
+```
