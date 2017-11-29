@@ -7,7 +7,7 @@ Tolga Bolukbasi, Kai-Wei Chang, James Zou, Venkatesh Saligrama, and Adam Kalai. 
 
 **Just looking to download a debiased embedding?**
 
-You can [download](https://drive.google.com/file/d/0B5vZVlu2WoS5ZTBSekpUX0RSNDg/view?usp=sharing) hard debiased version of the Google's Word2Vec embedding trained on Google News (Origin: GoogleNews-vectors-negative300.bin.gz found [here](https://code.google.com/archive/p/word2vec/)).
+You can download [binary](https://drive.google.com/file/d/0B5vZVlu2WoS5ZTBSekpUX0RSNDg)/[txt](https://drive.google.com/open?id=1_PvT4ZvtZjhq4HPywA8-u06epht9ccOw) hard debiased version of the Google's Word2Vec embedding trained on Google News (Origin: GoogleNews-vectors-negative300.bin.gz found [here](https://code.google.com/archive/p/word2vec/)).
 
 **Python scripts:**
 - **learn_gender_specific.py**: given a word embedding and a seed set of gender-specific words (like <i>king</i>, <i>she</i>, etc.), it learns a much larger list of gender-specific words
