@@ -18,7 +18,7 @@ Tolga Bolukbasi, Kai-Wei Chang, James Zou, Venkatesh Saligrama, and Adam Kalai
 """
 
 DEFAULT_NUM_WORDS = 27000
-FILENAMES = {"g_wiki": "glove.6B.300d.small.txt",            
+FILENAMES = {"g_wiki": "glove.6B.300d.small.txt",
              "g_twitter": "glove.twitter.27B.200d.small.txt",
              "g_crawl": "glove.840B.300d.small.txt",
              "w2v": "GoogleNews-word2vec.small.txt",
@@ -30,7 +30,7 @@ def dedup(seq):
     return [x for x in seq if not (x in seen or seen.add(x))]
 
 
-def safe_word(w): 
+def safe_word(w):
     # ignore words with numbers, etc.
     # [a-zA-Z\.'_\- :;\(\)\]] for emoticons
     return (re.match(r"^[a-z_]*$", w) and len(w) < 20 and not re.match(r"^_*$", w))
@@ -45,14 +45,14 @@ def to_utf8(text, errors='strict', encoding='utf8'):
 
 
 class WordEmbedding:
-    def __init__(self, fname):            
+    def __init__(self, fname):
         self.thresh = None
         self.max_words = None
         self.desc = fname
-        print("*** Reading data from " + fname)        
+        print("*** Reading data from " + fname)
         if fname.endswith(".bin"):
-            from gensim.models import word2vec
-            model = word2vec.Word2Vec.load_word2vec_format(fname, binary=True)
+            import gensim.models
+            model =gensim.models.KeyedVectors.load_word2vec_format(fname, binary=True)
             words = sorted([w for w in model.vocab], key=lambda w: model.vocab[w].index)
             vecs = [model[w] for w in words]
         else:
@@ -62,7 +62,7 @@ class WordEmbedding:
             with open(fname, "r", encoding='utf8') as f:
                 for line in f:
                     s = line.split()
-                    v = np.array([float(x) for x in s[1:]])                    
+                    v = np.array([float(x) for x in s[1:]])
                     if len(vecs) and vecs[-1].shape!=v.shape:
                         print("Got weird line", line)
                         continue
@@ -111,7 +111,7 @@ class WordEmbedding:
         self.reindex()
 
     def save(self, filename):
-        with open(filename, "w") as f: 
+        with open(filename, "w") as f:
             f.write("\n".join([w+" " + " ".join([str(x) for x in v]) for w, v in zip(self.words, self.vecs)]))
         print("Wrote", self.n, "words to", filename)
 
@@ -138,7 +138,7 @@ class WordEmbedding:
                 v = self.diff(w1, w2)
                 self.desc += w1 + "-" + w2
             self.vecs = self.vecs - self.vecs.dot(v)[:, np.newaxis].dot(v[np.newaxis, :])
-        self.normalize()      
+        self.normalize()
 
     def compute_neighbors_if_necessary(self, thresh, max_words):
         thresh = float(thresh) # dang python 2.7!
@@ -149,13 +149,13 @@ class WordEmbedding:
         self.max_words = max_words
         vecs = self.vecs[:max_words]
         dots = vecs.dot(vecs.T)
-        dots = scipy.sparse.csr_matrix(dots * (dots >= 1-thresh/2))    
+        dots = scipy.sparse.csr_matrix(dots * (dots >= 1-thresh/2))
         from collections import Counter
         rows, cols = dots.nonzero()
         nums = list(Counter(rows).values())
         print("Mean:", np.mean(nums)-1)
         print("Median:", np.median(nums)-1)
-        rows, cols, vecs = zip(*[(i, j, vecs[i]-vecs[j]) for i, j, x in zip(rows, cols, dots.data) if i<j])        
+        rows, cols, vecs = zip(*[(i, j, vecs[i]-vecs[j]) for i, j, x in zip(rows, cols, dots.data) if i<j])
         self._neighbors = rows, cols, np.array([v/np.linalg.norm(v) for v in vecs])
 
     def neighbors(self, word, thresh=1):
@@ -214,7 +214,7 @@ def text_plot_words(xs, ys, words, width = 90, height = 40, filename=None):
     for (x, y, word) in zip(xs, ys, words):
         i = int(x*(width - 1 - PADDING))
         j = int(y*(height-1))
-        row = res[j]    
+        row = res[j]
         z = list(row[i2] != ' ' for i2 in range(max(i-1, 0), min(width, i + len(word) + 1)))
         if any(z):
             continue
