@@ -1,5 +1,8 @@
 # Debiaswe: try to make word embeddings less sexist
 
+&#x1F534;[FAT* 2018 tutorial slides](https://drive.google.com/file/d/1IxIdmreH4qVYnx68QVkqCC9-_yyksoxR/view?usp=sharing)
+
+
 Here we have the code and data for the following paper:
 [Man is to Computer Programmer as Woman is to
 Homemaker? Debiasing Word Embeddings](http://papers.nips.cc/paper/6228-man-is-to-computer-programmer-as-woman-is-to-homemaker-debiasing-word-embeddings.pdf) by 
@@ -30,6 +33,5 @@ We also have seed data used to debias and crowd data used to evaluate the embedd
 - **definitional_pairs.json**: The ten pairs of words we use to define the gender direction
 - **equalize_pairs.json**: Some crowdsourced F-M pairs of words that represent gender direction
 
-```diff
-+ This is only a partial repo at the moment. I will add more features as I get time.
-```
+
+&#x1F535; This is only a partial repo at the moment. I will add more features as I get time.
