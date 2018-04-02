@@ -37,4 +37,4 @@ We also have seed data used to debias and crowd data used to evaluate the embedd
 &#x1F535; This is only a partial repo at the moment. I will add more features as I get time.
 
 
-(All external files that I refer within this repo can be found in [this folder](https://drive.google.com/drive/folders/0B5vZVlu2WoS5dkRFY19YUXVIU2M?usp=sharing).
+(All external files that I refer within this repo can be found in [this folder](https://drive.google.com/drive/folders/0B5vZVlu2WoS5dkRFY19YUXVIU2M?usp=sharing).)
