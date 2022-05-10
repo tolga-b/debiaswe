@@ -1,5 +1,5 @@
 # filter all
-*
+w2v_gnews_small.txt
 # except .gitignore
 !.gitignore
 
