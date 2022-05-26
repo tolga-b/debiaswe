@@ -92,3 +92,9 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+.idea/
+__init__.py
+data/.Rhistory
+embeddings/GoogleNews-vectors-negative300-hard-debiased.bin
+embeddings/w2v_gnews_small.zip

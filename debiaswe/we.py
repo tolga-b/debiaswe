@@ -73,9 +73,10 @@ class WordEmbedding:
         print(self.vecs.shape)
         self.words = words
         self.reindex()
-        norms = np.linalg.norm(self.vecs, axis=1)
-        if max(norms)-min(norms) > 0.0001:
-            self.normalize()
+        ### comment: should i remove normalize?
+        # norms = np.linalg.norm(self.vecs, axis=1)
+        # if max(norms)-min(norms) > 0.0001:
+        #     self.normalize()
 
     def reindex(self):
         self.index = {w: i for i, w in enumerate(self.words)}
