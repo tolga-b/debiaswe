@@ -6,6 +6,7 @@ import json
 import numpy as np
 import argparse
 import sys
+from scipy import spatial
 if sys.version_info[0] < 3:
     import io
     open = io.open
@@ -20,12 +21,14 @@ Tolga Bolukbasi, Kai-Wei Chang, James Zou, Venkatesh Saligrama, and Adam Kalai
 
 
 def debias(E, gender_specific_words, definitional, equalize, professions):
-    pass
     gender_direction = we.doPCA(definitional, E).components_[0]
     # specific_set = set(gender_specific_words)
     # for i, w in enumerate(E.words):
     #     if w not in specific_set:
+    #         a=we.drop(E.vecs[i], gender_direction)
+    #         b=E.vecs[i]
     #         E.vecs[i] = we.drop(E.vecs[i], gender_direction)
+    #
     # E.normalize()
     # candidates = {x for e1, e2 in equalize for x in [(e1.lower(), e2.lower()),
     #                                                  (e1.title(), e2.title()),

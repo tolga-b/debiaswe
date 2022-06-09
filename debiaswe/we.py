@@ -95,6 +95,7 @@ class WordEmbedding:
     def normalize(self):
         self.desc += ", normalize"
         self.vecs /= np.linalg.norm(self.vecs, axis=1)[:, np.newaxis]
+        self.vecs[np.isnan(self.vecs) | np.isinf(self.vecs)] = 0
         self.reindex()
 
     def shrink(self, numwords):
