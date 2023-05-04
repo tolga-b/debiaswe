@@ -2,10 +2,8 @@ from __future__ import print_function, division
 import sys
 sys.path.append("..") # Adds higher directory to python modules path.
 from debiaswe.debiaswe import we
-from debias_files.consts import WordsToDebias
-import json
+from debias_files.src.consts import WordsToDebias
 import numpy as np
-import argparse
 import sys
 if sys.version_info[0] < 3:
     import io
